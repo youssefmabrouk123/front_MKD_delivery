@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>{{ isEdit ? 'Modifier Colis' : 'Ajouter Colis' }}</h2>
+    <form (ngSubmit)="saveParcel()" class="form">
+      <!-- Nom Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="parcel.nom" name="nom" required />
+      </mat-form-field>
+  
+      <!-- Description Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="parcel.description" name="description" required></textarea>
+      </mat-form-field>
+  
+      <!-- Catégorie Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Catégorie</mat-label>
+        <mat-select [(ngModel)]="parcel.categorie" name="categorie" required>
+          <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- Poids Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Poids (kg)</mat-label>
+        <input matInput type="number" [(ngModel)]="parcel.poids" name="poids" required />
+      </mat-form-field>
+  
+      <!-- Submit Button -->
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+        <button mat-raised-button color="warn" type="button" routerLink="/">Annuler</button>
+      </div>
+    </form>
+  </div>
+      

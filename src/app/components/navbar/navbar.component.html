@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <div class="logo">
+      <mat-icon>local_shipping</mat-icon>
+      <span>MKD delivery</span>
+    </div>
+    <span class="spacer"></span>
+    <nav class="nav-links">
+      <button mat-button routerLink="/" routerLinkActive="active-link">Liste des Colis</button>
+      <button mat-button routerLink="/add" routerLinkActive="active-link">Ajouter un Colis</button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink="/categories">Catégories</button>
+        <button mat-menu-item routerLink="/profile">Mon Profil</button>
+        <button mat-menu-item>Déconnexion</button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </nav>
+  </mat-toolbar>
+  

@@ -1,0 +1,60 @@
+<div class="container">
+    <h2>Liste des Colis</h2>
+  
+    <!-- Filter by Category -->
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>Filtrer par Catégorie</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="applyCategoryFilter()">
+        <mat-option value="">Toutes les Catégories</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="filteredParcels" class="mat-elevation-z8">
+      <!-- Nom Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let parcel"> {{ parcel.nom }} </td>
+      </ng-container>
+  
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let parcel"> {{ parcel.description }} </td>
+      </ng-container>
+  
+      <!-- Catégorie Column -->
+      <ng-container matColumnDef="categorie">
+        <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+        <td mat-cell *matCellDef="let parcel"> {{ parcel.categorie }} </td>
+      </ng-container>
+  
+      <!-- Poids Column -->
+      <ng-container matColumnDef="poids">
+        <th mat-header-cell *matHeaderCellDef> Poids (kg) </th>
+        <td mat-cell *matCellDef="let parcel"> {{ parcel.poids }} </td>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let parcel">
+          <button mat-icon-button color="primary" [routerLink]="['/edit', parcel.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteParcel(parcel.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <!-- No Data Message -->
+    <div *ngIf="filteredParcels.length === 0" class="no-data">
+      <p>Aucun colis trouvé.</p>
+    </div>
+  </div>
+  
